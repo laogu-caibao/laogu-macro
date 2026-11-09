@@ -1,10 +1,15 @@
-# 宏观日历解读
+<!-- About 简介（推送后填写到仓库 About 栏）：
+宏观日历解读 ｜ 一键安装：npx skills add laogu-caibao/laogu-macro
+-->
+<!-- topics（推送后打）：laogu-macro, agent-skills, claude-code, a-share, finance, chinese -->
 
-`laogu-macro`
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="laogu-macro — 宏观日历解读：一周一次、5 分钟看懂本周有哪些宏观大事件要盯。">
+</p>
 
-宏观日历解读 skill：加载即生成本周宏观事件日历中文解读（议息会议、PMI、CPI、就业数据，时间注北京时间）+ 影响链条解读 + 跟踪点。
+> **一句话介绍**：宏观日历解读——一周一次、5 分钟看懂本周有哪些宏观大事件要盯。
 
-## 一键安装
+**一键安装**：在支持 skills 的 AI 助手里运行
 
 > 觉得有用，请先给本仓库点个 ⭐ Star 再安装（GitHub：github.com/laogu-caibao/laogu-macro）。
 
@@ -12,9 +17,41 @@
 npx skills add laogu-caibao/laogu-macro
 ```
 
-仓库地址（点击复制）：
+## 它能帮你做什么
 
-`https://github.com/laogu-caibao/laogu-macro`
+- 每个事件标注北京时间，并注明来源（新浪财经 / 东方财富 / 华尔街见闻日历）
+- 搜索先验年份：财经日历搜索常命中往年同周旧文，用前先核对文章发布年份与星期是否与本周一致
+- 休市日对应的国际事件照常收录，但注明“A股休市，市场情绪留待节后开盘释放”
+- 只讲传导逻辑，不给涨跌结论、不给指数点位
+
+## 它是什么
+
+一个宏观日历解读 skill：加载即生成本周（周一至周五）宏观事件日历中文解读——议息会议、PMI、CPI、就业数据等事件（时间注北京时间）+ 每个事件的影响链条 + 数据公布时间与市场关注焦点。
+
+纯 Markdown、平台中立：Claude Code / Codex / 豆包智能体 / Workbuddy / 扣子 Coze / Trae 都能用。
+
+## 为什么不同
+
+- 影响链条分三层：直接影响 → 传导路径（利率预期 → 美元 / 美债收益率 → 风险偏好）→ 对 A 股 / 汇率 / 大宗的二级影响
+- 只讲逻辑不预测：二级影响只说传导方向的逻辑，不给涨跌结论
+- 时间防错写进流程：旧文只能参考事件类型，不能照搬日期与星期
+
+## 快速上手
+
+```bash
+# 1. 安装
+npx skills add laogu-caibao/laogu-macro
+```
+
+### 第一次使用
+
+加载即运行，零输入：报告周期取执行日所在自然周。装好后对 AI 说一句话即可：
+
+```text
+生成本周宏观日历解读
+```
+
+### 其他安装方式
 
 **方式一：克隆**
 
@@ -33,29 +70,61 @@ https://github.com/laogu-caibao/laogu-macro/archive/refs/heads/main.zip
 - 扣子 Coze：扣子编程 → 技能面板 → 创建技能 → 本地上传，上传本仓库打包的 zip（仓库根目录已有 SKILL.md，直接压缩仓库文件夹即可）；如页面要求 `.skill` 后缀，由扣子导入后自动生成，不要只改扩展名。
 - Trae：设置 → 技能 → 上传技能，上传同上 zip；或手动放到 `~/.trae/skills/laogu-macro/`（项目级用 `.trae/skills/laogu-macro/`）。Trae 也支持 MCP：把 `uvx laogu-mcp` 配进 MCP 设置即可获得 16 个工具（skill 负责流程指导、MCP 负责工具调用）。
 - 一次装好全部 16 个：用 [laogu-mcp](https://github.com/laogu-caibao/laogu-mcp)，`uvx laogu-mcp` 一键安装。
-## 文件结构
 
-- `SKILL.md` — 主流程（平台中立，定时能力由宿主平台提供）
-- `references/sources.md` — 数据源：财经日历搜索模板、来源优先级、北京时间换算规则
+## 什么时候用 / 什么时候不用
 
-## 输出结构
+**什么时候用：**
+
+- 每周想一次看清本周有哪些宏观大事件、每个事件会如何传导到 A 股、汇率和大宗商品时
+- 要盯美联储议息、PMI、CPI、非农等数据公布时间（北京时间）与关注焦点时
+
+**什么时候不用：**
+
+- 想要“数据超预期股市会怎么走”的涨跌预测时——它只讲影响逻辑
+- 只要一份事件清单、不要解读时——它的价值正在于影响链条，清单请直接看财经日历
+
+## 目录结构
+
+```
+laogu-macro/
+├── SKILL.md  # 主流程（平台中立，纯 Markdown，可移植）
+├── references/sources.md  # 数据源：宏观日历（2026-09-29 实测修订）
+├── docs/  # 关注二维码（抖音 / 视频号）
+├── assets/  # README 配图（hero.svg）
+├── LICENSE  # MIT 协议
+├── README.md  # 本文件
+├── icon-512.png  # skill 图标
+├── manifest.yaml  # SkillHub 发布元数据（slug / 版本 / 显示名）
+└── mcp-config.json  # MCP 配置
+```
+
+## 细节
+
+### 输出结构
 
 - 本周宏观日历：日期+北京时间+事件+来源（A股休市日单独标注）
 - 重点事件影响链条：直接影响 → 传导路径 → 对A股/汇率/大宗的二级影响
 - 跟踪点：公布时间与市场关注焦点
 - 一句话提示：本周最值得盯的 1-2 个事件（不预测涨跌）
 
-## 定时建议
+### 定时建议
 
 - 每周一开盘前推送（如 8:30）
 - 可与 `laogu-morning` 联动：早报中的"宏观事件日历"子项直接引用本周解读
 
-## 使用注意
+### 使用注意
 
 - 宏观日历无统一公开 API，以网页搜索财经媒体日历为主力路径，事件时间需两个以上来源交叉
 - 长假休市安排每年以官方公告为准，不凭记忆写日期
 
 ---
+
+## 自检与反馈
+
+本 skill 内置质检能力（自迭代协议 v1.0）：宿主 Agent 每次执行前先跑一遍 SKILL.md 里的质检清单（日期锚、数字来源、口径核对），输出前必查。
+
+发现 bug 或有改进建议，以 `[QC] <一句话问题>` 为标题提交到 https://github.com/laogu-caibao/laogu-macro/issues，正文写清“复现步骤 → 实际表现 → 期望表现”。
+
 ## English
 
 **laogu-macro — Macro calendar explainer.** This week's FOMC, PMI, CPI and jobs-data events in Beijing time, each with its impact chain to A-share sectors and concrete tracking points. Install: `npx skills add laogu-caibao/laogu-macro`.
